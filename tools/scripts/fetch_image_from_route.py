@@ -18,10 +18,11 @@ segment = int(sys.argv[2])
 frame = int(sys.argv[3])
 
 url = 'https://api.commadotai.com/v1/route/'+sys.argv[1]+"/files"
+print(url)
 r = requests.get(url, headers={"Authorization": "JWT "+jwt}, timeout=10)
 assert r.status_code == 200
 print("got api response")
-
+print(r.json['cameras'])
 cameras = r.json()['cameras']
 if segment >= len(cameras):
   raise Exception("segment %d not found, got %d segments" % (segment, len(cameras)))
